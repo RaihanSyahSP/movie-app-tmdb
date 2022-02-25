@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --primary-color:rgb(72, 203, 230);
+    --secondary-color:rgb(32, 97, 119);
+    --third-color:rgb(7, 32, 37);
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+header {
+    background-color: var(--secondary-color);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+#tags {
+    width:80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+
+.tag {
+    color: white;
+    padding: 10px 20px;
+    background-color: rgb(235, 69, 3);
+    border-radius: 50px;
+    margin: 5px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tag.highlight {
+    background-color: rgb(235, 142, 3);
+}
+
+.title-app {
+    display: flex;
+    justify-content: space-around;
+    /* width:15%; */
+}
+
+.title-app .icon {
+    font-size: 1.5rem;
+    padding-right:10px;
+}
+
+.title-app h1 {
+    color: white;
+    font-weight: bold;
+}
+
+.search {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: white; 
+}
+
+.search:focus {
+    outline: none;
+    background-color: var(--primary-color);
+}
+
+.search::placeholder {
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.movie {
+    width: 300px;
+    margin: 1rem;
+    border-radius: 3px;
+    background-color: var(--secondary-color);
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.75);
+    position: relative;
+    overflow: hidden;
+}
+
+.movie img {
+    width: 100%;
+}
+
+.movie-info{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.movie-info span {
+    background-color: var(--third-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.movie-info h3 {
+    margin-top: 0;
+}
+
+.movie-info span.orange {
+    color: orange;
+}
+.movie-info span.green {
+    color: lightgreen;
+}
+.movie-info span.red {
+    color: red;
+}
+
+.popup .overlay {
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100vw;
+    height:100vh;
+    background:rgba(0,0,0,0.7);
+    z-index:1;
+    display:none;
+}
+
+.popup .content {
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background:#fff;
+    width:500px;
+    height:250px;
+    z-index:2;
+    text-align:center;
+    padding:20px;
+    box-sizing:content-box;
+    box-shadow:2px 3px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.content p {
+    padding-top: 2rem;
+}
+
+.popup .close-btn {
+    cursor:pointer;
+    position:absolute;
+    right:20px;
+    top:20px;
+    width:30px;
+    height:30px;
+    background:#222;
+    color:#fff;
+    font-size:25px;
+    font-weight:600;
+    line-height:30px;
+    text-align:center;
+    border-radius:50%;
+}
+
+.popup .close-btn:hover {
+    background-color: rgb(212, 38, 38);
+    transition: 0.3s;
+}
+
+.popup.active .overlay {
+    display:block;
+}
+
+.popup.active .content {
+    transition:all 300ms ease-in-out;
+    transform:translate(-50%,-50%) scale(1);
+}
+
+
+button {
+    justify-content: center;
+    color:#fff;
+    background-color: var(--third-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    padding: 0.4rem;
+    margin: 0.5rem 0.5rem;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    color: #222;
+    cursor: pointer;;
+}
+
+.no-results {
+    color: white;
+}
+
+.footer {
+    background-color: var(--secondary-color);
+    text-align: center;
+    padding: 2.5rem 0;
+    margin-top: 2rem;
+    color: white;
+}
+
+.footer a:hover {
+    color: rgb(235, 142, 3);
+    transition: 0.3s;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+
+/* Small devices (landscape phones, 576px and down) */ 
+@media (max-width: 576px) {  
+  input {
+  	width: 40%;
+    margin-left: 8rem;
+  }
+
+  .search {
+      font-size: 0.8rem;
+  }
+
+  .popup .content {
+    width:300px;
+    height:200px;
+  }
+
+  .content p {
+      font-size: 0.8rem;
+      padding-top: 0.8rem;
+  }
+
+  .popup .close-btn{
+    width: 20px;
+    height: 20px;
+    font-size:15px;
+    font-weight:600;
+    line-height:20px;
+  }
+
+  .title-app h1 {
+      font-size: 1.5rem;
+  }
+
+  .tag {
+    color: white;
+    padding: 5px 10px;
+    margin: 3px;
+    font-size: 0.9rem;
+    display: inline-block;
+    cursor: pointer;
+    }
+
+    .footer a {
+        font-size: 0.8rem;
+    }
+}
+
+
+/* Medium devices (tablets, 768px and down)*/
+@media (min-width: 768px) {
+   
+
+    .popup .content {
+        width:400px;
+        height:300px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .popup .content {
+        width:500px;
+        height:250px;
+    }
+}

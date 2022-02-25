@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Movies TMDB</title>
+</head>
+<body>
+
+    <header>
+        <div class="title-app">
+            <div class="icon">🎬</div>
+            <h1>Movie App</h1>
+        </div>
+        <form id="form">
+            <input type="text" name="search" placeholder="Search..." id="search" class="search">
+        </form>
+    </header>
+
+    <!-- genres tags -->
+    <div id="tags">
+    </div>
+
+
+    <main id="main">
+
+            <!-- title & image movie -->
+            <div class="movie">
+                <div class="movie-info">
+                </div>
+                <button onclick="togglePopup()">See Details</button>
+            </div>
+
+            <!-- see details -->
+            <div class="popup" id="popup-1">
+                <div class="overlay"></div>
+                <div class="content">
+                    <div class="close-btn" onclick="togglePopup()">&times;</div>
+                </div>
+            </div>
+
+    </main>
+
+    <footer class="footer">
+        <a href="https://www.themoviedb.org/">
+            More Info Click Here
+        </a>
+    </footer>
+    
+
+    <script src="./js/script.js"></script>
+</body>
+</html>
