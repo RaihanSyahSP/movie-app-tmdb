@@ -10,6 +10,16 @@ const form = document.getElementById('form')
 const search = document.getElementById('search')
 const tagEl = document.getElementById('tags')
 
+const prev = document.getElementById('prev')
+const next = document.getElementById('next')
+const current = document.getElementById('current')
+
+let currentPage = 1
+let nextPage = 2
+let prevPage = 3
+let lastUrl = ''
+let totalPages = 100
+
 const genres = [
             {
                 "id": 28,
@@ -92,6 +102,7 @@ const genres = [
 
 
 const getMovies = (url) => {
+    lastUrl = url
     fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -99,6 +110,25 @@ const getMovies = (url) => {
         let movies = data.results
         if(movies.length != 0) {
             showMovies(movies)
+            currentPage = data.page
+            nextPage = currentPage + 1
+            prevPage = currentPage - 1
+            totalPages = data.total_pages
+
+            current.innerText = currentPage
+            if(currentPage <= 1) {
+                prev.classList.add('disabled')
+                next.classList.remove('disabled')
+            } else if (currentPage >= totalPages) {
+                next.classList.add('disabled')
+                prev.classList.remove('disabled')
+            } else {
+                next.classList.remove('disabled')
+                prev.classList.remove('disabled')
+            }
+
+            tagEl.scrollIntoView({behavior: "smooth"})
+
         } else {
             main.innerHTML = `<h1 class='no-results'>No Movie Found</h1>`
         }
@@ -114,6 +144,7 @@ const highlightSelection = () => {
     tags.forEach(tag => {
         tag.classList.remove('highlight')
     })
+    clearTags()
     if(selectedGenre.length != 0) {
         selectedGenre.forEach(id => {
             const highlightedTag = document.getElementById(id)
@@ -210,12 +241,61 @@ const getColor = (vote) => {
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     const searchTerm = search.value
+    selectedGenre = []
+    highlightSelection()
     if(searchTerm) {
         const url = `${api_url}&query=${searchTerm}`
         getMovies(search_url+'&query='+searchTerm)
     }
 })
 
+const clearTags = () => {
+    let clearBtn = document.getElementById('clear')
+    if(clearBtn) {
+        clearBtn.classList.add('highlight')
+    } else {
+        let clear = document.createElement('div')
+        clear.classList.add('tag','highlight')
+        clear.id = 'clear'
+        clear.innerText = 'Clear Tags'
+        clear.addEventListener('click', () => {
+            selectedGenre = []
+            setGenre()
+            getMovies(api_url)
+        })
+        tagEl.append(clear)
+    }
+
+}
+
+const pageCall = (page) => {
+    let urlSplit = lastUrl.split('?')
+    let queryParams = urlSplit[1].split('&')
+    let key = queryParams[queryParams.length-1].split('=')
+    if (key[0] != 'page') {
+        let url = lastUrl + '&page=' + page
+        getMovies(url) 
+    } else {
+        key[1] = page.toString()
+        let a = key.join('=')
+        queryParams[queryParams.length-1] = a
+        let b = queryParams.join('&')
+        let url = urlSplit[0] + '?' + b
+        getMovies(url)
+    }
+}
+
+prev.addEventListener('click', () => {
+    if(prevPage > 0) {
+        pageCall(prevPage)
+    }
+})
+
+next.addEventListener('click', () => {
+    if(nextPage <= totalPages) {
+        pageCall(nextPage)
+    }
+})
 
 
 const togglePopup = (id) => {

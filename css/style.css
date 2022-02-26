@@ -8,7 +8,7 @@
 }
 
 :root {
-    --primary-color:rgb(72, 203, 230);
+    --primary-color:rgb(48, 198, 228);
     --secondary-color:rgb(32, 97, 119);
     --third-color:rgb(7, 32, 37);
 }
@@ -237,6 +237,31 @@ a, a:visited, a:hover, a:active {
   color: inherit;
 }
 
+.pagination {
+    display: flex;
+    margin: 10px 30px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.page {
+    padding: 20px;
+    cursor:pointer;
+}
+
+.page.disabled {
+    color: grey;
+    cursor: not-allowed;
+}
+
+.current {
+    padding: 25px 30px;
+    border-radius: 50px;
+    border: 5px solid rgb(235, 69, 3);
+    font-size: 20px;
+    font-weight: 600;
+}
 
 /* Small devices (landscape phones, 576px and down) */ 
 @media (max-width: 576px) {  
@@ -282,6 +307,10 @@ a, a:visited, a:hover, a:active {
 
     .footer a {
         font-size: 0.8rem;
+    }
+
+    .current {
+        padding: 10px 15px;
     }
 }
 
